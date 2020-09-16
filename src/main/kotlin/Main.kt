@@ -29,21 +29,20 @@ fun main() {
 //    val text = "hello hello hello hello hello hello hello hello one one one one a b n a a a a a a a a a a a a a a a a a ab b b b b a a a a"
         mutableListOfStrings.removeIf { it1 -> it1.none { it2 -> it2 in listOfEnglishLettersAndForbiddenCharacters } }
 //    for(string in mutableListOfStrings){
-      /*var stringBuilderCounter = 0
+      var stringBuilderCounter = 0
         val mutableListOfStringBuilders = mutableListOf(StringBuilder())
         var flattenedString = mutableListOfStringBuilders[stringBuilderCounter]
-        */
-        var flattenedString = StringBuilder()
+//        var flattenedString = StringBuilder()
         mutableListOfStrings.forEach {
-        /*if(flattenedString.length!=Integer.MAX_VALUE - 9) flattenedString.append(it) else{
+        if(flattenedString.length!=Integer.MAX_VALUE - 9) flattenedString.append(it) else{
                 stringBuilderCounter++
                 mutableListOfStringBuilders.add(StringBuilder())
                 flattenedString = mutableListOfStringBuilders[stringBuilderCounter]
                 flattenedString.append(it)
-            }*/
+            }
             flattenedString.append(it)
         }
-        val wordsMappedToFrequencySortedByValue = getSortedFrequencyMap(/*string*/flattenedString.toString())
+        val wordsMappedToFrequencySortedByValue = getSortedFrequencyMap(/*string*//*flattenedString.toString()*/mutableListOfStringBuilders)
 //        println(filesInFolder[mutableListOfStrings.indexOf(flattenedString/*string*/)])
         println()
         wordsMappedToFrequencySortedByValue.forEach { print("${it.key.prependIndent("\n")}=${it.value}") }
@@ -54,7 +53,7 @@ fun main() {
     println(timeToComplete)
 }
 
-private fun getSortedFrequencyMap(text: String/*listOfStringBuilders: MutableList<StringBuilder>*/): Map<String, Int?> {
+private fun getSortedFrequencyMap(/*text: String*/listOfStringBuilders: MutableList<StringBuilder>): Map<String, Int?> {
     val listOfWords = text.split(" ", ".", ",", ";", ":", /*"\"",*/ "\'", "!", "?", "<", ">", "/", "\\", "%", "$", "#", "@", "^", "&", "*", "(", ")", "-", "+", "=", "{", "[", "]", "}", "`", "~", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0").filterNot { it == ""/*||it.length<3*/ || it.any { letter -> letter in listOfEnglishLettersAndForbiddenCharacters } }
     val mutableListOfWords = MutableList(listOfWords.size) {
         listOfWords[it]
